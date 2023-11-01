@@ -13,4 +13,19 @@ class Category extends Model
         'name',
         'parent_category_id',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class, 'parent_category_id');
+    }
+
+    public function childCategories()
+    {
+        return $this->hasMany(Category::class, 'parent_category_id');
+    }
 }
